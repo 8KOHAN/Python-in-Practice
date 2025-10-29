@@ -1,7 +1,7 @@
 # data_input_output.py
 
 # -----------------------------
-# SAFE INPUT FUNCTION
+# SAFE INPUT FUNCTIONS
 # -----------------------------
 def get_int(prompt):
     """Safely read an integer from user input."""
@@ -87,7 +87,7 @@ else:
 print()
 
 # -----------------------------
-# FORMATTED OUTPUT
+# FORMATTED OUTPUT (using f-strings)
 # -----------------------------
 pi = 3.1415926535
 radius = get_float("Enter circle radius: ")
@@ -96,13 +96,80 @@ print(f"Circle area with radius {radius} = {area:.3f}")
 print()
 
 # -----------------------------
-# OUTPUT EXAMPLES
+# PRINT FUNCTION CAPABILITIES
 # -----------------------------
-print("Processing", end="")
+
+# Basic printing
+print("Hello, world!")
+print("Python", "is", "awesome!")
+print()
+
+# Separator (sep)
+print("Using default separator:")
+print("apple", "banana", "cherry")
+print("\nUsing custom separator:")
+print("apple", "banana", "cherry", sep=", ")
+print("2025", "10", "27", sep="-")
+print()
+
+# End parameter
+print("Loading", end="")
 print(".", end="")
 print(".", end="")
 print(". Done!\n")
 
-print("Values with custom separator:")
-print(10, 20, 30, 40, sep=" | ")
+# Escape characters
+print("Line1\nLine2\nLine3")  # new lines
+print("Column1\tColumn2\tColumn3")  # tab spaces
+print("Use \\ to print a backslash")
+print("He said: \"Python is great!\"")
+print()
+
+# Printing variables
+print("Name:", name, "Age:", age, "Score:", area)
+print(f"Name: {name}, Age: {age}, Score: {area:.2f}")
+print("Name: {}, Age: {}, Score: {:.2f}".format(name, age, area))
+print()
+
+# Number formatting
+pi = 3.1415926535
+print("Pi (2 decimals): {:.2f}".format(pi))
+print(f"Pi (3 decimals): {pi:.3f}")
+print("Pi as integer:", int(pi))
+print()
+
+# Alignment and width
+print("Left aligned  :", f"{'Python':<10}rocks!")
+print("Right aligned :", f"{'Python':>10}rocks!")
+print("Centered      :", f"{'Python':^10}rocks!")
+print()
+
+# Multiline printing
+print("""This is
+a multi-line
+string output.""")
+print()
+
+# Printing without spaces
+print("Hello" + "World!")      # no space
+print("Hello" + " " + "World!")  # manual space
+print()
+
+# Printing data structures
+fruits = ["apple", "banana", "cherry"]
+info = {"name": "Alice", "age": 25}
+print("List:", fruits)
+print("Dictionary:", info)
+print()
+
+# Custom ASCII styled output
+print("=" * 30)
+print("      USER INFORMATION      ")
+print("=" * 30)
+print(f"Name : {name}")
+print(f"Age  : {age}")
+print(f"Height: {height:.2f} m")
+print(f"Score : {area:.2f}")
+print("=" * 30)
+print("End of output")
 print()
