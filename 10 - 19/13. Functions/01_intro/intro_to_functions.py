@@ -50,7 +50,7 @@ print()
 # ------------------------------------------------------------
 # EXAMPLE 2 — Good function (has clear meaning)
 # ------------------------------------------------------------
-def print_values(values: list[int]) -> None:
+def print_values(*, values: list[int]) -> None:
     """
     Print all integers provided in a list.
     This function has a clear, single responsibility.
@@ -60,7 +60,7 @@ def print_values(values: list[int]) -> None:
 
 
 print("=== GOOD FUNCTION EXAMPLE ===")
-print_values([10, 20, 30])
+print_values(values=[10, 20, 30])
 print()
 
 
@@ -76,12 +76,12 @@ for n in numbers:
 print("Inline squares:", squared_inline)
 
 # Good approach: use a dedicated function
-def square_list(values: list[int]) -> list[int]:
+def square_list(*, values: list[int]) -> list[int]:
     """Return a new list where each element is squared."""
     return [v * v for v in values]
 
 print("=== USING A FUNCTION FOR MEANING ===")
-print("Squares:", square_list(numbers))
+print("Squares:", square_list(values=numbers))
 print()
 
 
@@ -96,7 +96,7 @@ print("age:", 25)
 print("email:", "alice@example.com")
 
 # GOOD: one meaningful function for one meaningful action
-def print_user(name: str, age: int, email: str) -> None:
+def print_user(*, name: str, age: int, email: str) -> None:
     """Display user information in a readable format."""
     print("User registered:")
     print(f"  Name:  {name}")
@@ -104,7 +104,7 @@ def print_user(name: str, age: int, email: str) -> None:
     print(f"  Email: {email}")
 
 print("=== GOOD ABSTRACTION ===")
-print_user("Alice", 25, "alice@example.com")
+print_user(name="Alice", age=25, email="alice@example.com")
 print()
 
 
@@ -119,5 +119,3 @@ print(" - improve readability")
 print(" - operate at one consistent level of abstraction")
 print(" - NOT exist only to remove duplicated lines")
 print("End of introduction.")
-
-
