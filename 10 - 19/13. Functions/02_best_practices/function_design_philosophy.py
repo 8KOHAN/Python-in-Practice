@@ -20,7 +20,7 @@
 # ------------------------------------------------------------
 # EXAMPLE 1 — BAD FUNCTION: no single responsibility
 # ------------------------------------------------------------
-def handle_user_data(user: dict) -> None:
+def handle_user_data(*, user: dict) -> None:
     """
     This function does too many things:
        - validates input
@@ -43,7 +43,7 @@ def handle_user_data(user: dict) -> None:
 
 print("=== BAD FUNCTION ===")
 user_data = {"name": "Alice", "age": 22}
-handle_user_data(user_data)
+handle_user_data(user=user_data)
 print("User after processing:", user_data)
 print()
 
@@ -125,17 +125,17 @@ print()
 # ------------------------------------------------------------
 # Names should communicate intent, not mechanics.
 
-def x(a, b):
+def x(*, a: int, b: int) -> int:
     return a * b
 
-def multiply(num1: float, num2: float) -> float:
+def multiply(*, num1: float, num2: float) -> float:
     """Clearer and self-documenting name."""
     return num1 * num2
 
 
 print("=== NAMING COMPARISON ===")
-print("x(2, 3):", x(2, 3))  # unclear
-print("multiply(2, 3):", multiply(2, 3))  # clear meaning
+print("x(2, 3):", x(a=2, b=3))  # unclear
+print("multiply(2, 3):", multiply(num1=2, num2=3))  # clear meaning
 print()
 
 
@@ -143,22 +143,22 @@ print()
 # EXAMPLE 5 — BAD VS GOOD COHESION
 # ------------------------------------------------------------
 # BAD: unrelated logic in one function
-def bad_function(a: int, b: int, name: str) -> None:
-    print(a + b)
+def bad_function(*, num1: int, num2: int, name: str) -> None:
+    print(num1 + num2)
     print(f"Hello {name}")
     print("Unrelated tasks combined")
 
 # GOOD: separate, cohesive responsibilities
-def add_numbers(a: int, b: int) -> int:
-    return a + b
+def add_numbers(*, num1: int, num2: int) -> int:
+    return num1 + num2
 
 def greet_user(*, name: str) -> None:
     print(f"Hello, {name}!")
 
 print("=== BAD COHESION ===")
-bad_function(2, 3, "Eve")
+bad_function(num1=2, num2=3, name="Eve")
 print("=== GOOD COHESION ===")
-result = add_numbers(2, 3)
+result = add_numbers(num1=2, num2=3)
 print("Sum:", result)
 greet_user(name="Eve")
 print()
@@ -179,17 +179,34 @@ print("=== KEYWORD-ONLY ARGUMENTS ===")
 resize_image(width=1920, height=1080, mode="cover")  # Clear and safe
 print()
 
-# When to use '*':
-# - When argument order has no real meaning
-# - When function has many parameters of different kinds
-# - When function is part of a public API
+# ------------------------------------------------------------
+# ARGUMENT CLARITY: ALWAYS USE '*'
+# ------------------------------------------------------------
+# In modern Python code, it's considered best practice to ALWAYS use '*'
+# to enforce keyword-only arguments — even in simple functions.
 #
-# When NOT to use '*':
-# - In simple math-like functions where order is obvious
-#   Example: add(num1, num2), multiply(num1, num2)
+# Why:
+# - Explicit is better than implicit (Zen of Python).
+# - Keyword arguments make code self-documenting.
+# - It prevents mistakes when calling functions with wrong argument order.
+# - It allows you to safely evolve APIs without breaking existing code.
+# - It improves readability and clarity in large or collaborative projects.
+#
+# Example:
+#     def multiply(*, num1: float, num2: float) -> float:
+#         return num1 * num2
+#
+# Call style:
+#     multiply(num1=2, num2=3)
+#
+# This makes argument meaning clear at the call site,
+# avoids confusion about position, and enforces code consistency.
 #
 # In short:
-#   '*' improves clarity and reduces ambiguity in larger codebases.
+#   Use '*' for every function that accepts named parameters —
+#   it’s a mark of clarity, safety, and good API design.
+# ------------------------------------------------------------
+
 
 
 # ------------------------------------------------------------
