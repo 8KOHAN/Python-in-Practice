@@ -1,7 +1,7 @@
 # -----------------------------
 # SAFE INPUT FUNCTIONS
 # -----------------------------
-def get_int(prompt):
+def get_int(*, prompt: str):
     """Safely read an integer from user input."""
     while True:
         try:
@@ -10,7 +10,7 @@ def get_int(prompt):
         except ValueError:
             print("Invalid input! Please enter an integer number.")
 
-def get_float(prompt):
+def get_float(*, prompt: str):
     """Safely read a float from user input."""
     while True:
         try:
@@ -33,8 +33,8 @@ print()
 # -----------------------------
 # CONVERTING INPUT DATA TYPES SAFELY
 # -----------------------------
-age = get_int("Enter your age: ")
-height = get_float("Enter your height (in meters): ")
+age = get_int(prompt="Enter your age: ")
+height = get_float(prompt="Enter your height (in meters): ")
 
 print(f"You are {age} years old and {height} meters tall.")
 print()
@@ -88,7 +88,7 @@ print()
 # FORMATTED OUTPUT (using f-strings)
 # -----------------------------
 pi = 3.1415926535
-radius = get_float("Enter circle radius: ")
+radius = get_float(prompt="Enter circle radius: ")
 area = pi * (radius ** 2)
 print(f"Circle area with radius {radius} = {area:.3f}")
 print()
