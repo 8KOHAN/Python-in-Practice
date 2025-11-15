@@ -67,7 +67,6 @@ print()
 # ------------------------------------------------------------
 # EXAMPLE 3 — Functions improve readability
 # ------------------------------------------------------------
-# Bad approach: inline logic everywhere
 print("=== INLINE LOGIC (BAD READABILITY) ===")
 numbers = [1, 2, 3, 4, 5]
 squared_inline = []
@@ -75,10 +74,11 @@ for n in numbers:
     squared_inline.append(n * n)
 print("Inline squares:", squared_inline)
 
-# Good approach: use a dedicated function
+
 def square_list(*, values: list[int]) -> list[int]:
     """Return a new list where each element is squared."""
     return [v * v for v in values]
+
 
 print("=== USING A FUNCTION FOR MEANING ===")
 print("Squares:", square_list(values=numbers))
@@ -88,14 +88,13 @@ print()
 # ------------------------------------------------------------
 # EXAMPLE 4 — Levels of abstraction
 # ------------------------------------------------------------
-# BAD: mixed abstraction (low-level and high-level mixed)
 print("=== BAD MIXED ABSTRACTION ===")
 print("User registered:")
 print("name:", "Alice")
 print("age:", 25)
 print("email:", "alice@example.com")
 
-# GOOD: one meaningful function for one meaningful action
+
 def print_user(*, name: str, age: int, email: str) -> None:
     """Display user information in a readable format."""
     print("User registered:")
@@ -103,8 +102,86 @@ def print_user(*, name: str, age: int, email: str) -> None:
     print(f"  Age:   {age}")
     print(f"  Email: {email}")
 
+
 print("=== GOOD ABSTRACTION ===")
 print_user(name="Alice", age=25, email="alice@example.com")
+print()
+
+
+# ------------------------------------------------------------
+# EXAMPLE 5 — Default parameters (correct and incorrect usage)
+# ------------------------------------------------------------
+# A "default parameter" is a parameter that already has a value
+# if the caller does not provide it.
+#
+# BUT default parameters must follow strict good practices:
+# - Never use mutable defaults (lists, dicts, sets)
+# - Use defaults only when they express meaningful behavior
+# - Do NOT use defaults to hide missing arguments or design flaws
+
+
+# ------------------------------------------------------------
+# BAD EXAMPLE — Mutable default parameter
+# ------------------------------------------------------------
+def add_value_bad(*, value: int, container: list[int] = []):
+    """
+    BAD PRACTICE:
+    The list 'container' is created only once.
+    All calls share the same list => unexpected behavior.
+    """
+    container.append(value)
+    return container
+
+
+print("=== BAD DEFAULT PARAMETER EXAMPLE ===")
+print(add_value_bad(value=10))  
+print(add_value_bad(value=20))  # <- unexpected: list is shared!
+print()
+
+
+# ------------------------------------------------------------
+# GOOD EXAMPLE — Correct immutable default
+# ------------------------------------------------------------
+def add_value_good(
+    *,
+    value: int,
+    container: list[int] | None = None
+) -> list[int]:
+    """
+    GOOD PRACTICE:
+    Use None as default, then create a new list inside the function.
+    Ensures isolation between calls.
+    """
+    if container is None:
+        container = []
+    container.append(value)
+    return container
+
+
+print("=== GOOD DEFAULT PARAMETER EXAMPLE ===")
+print(add_value_good(value=10))
+print(add_value_good(value=20))
+print()
+
+
+# ------------------------------------------------------------
+# GOOD EXAMPLE — Default conveys meaningful behavior
+# ------------------------------------------------------------
+def greet_user(
+    *,
+    name: str,
+    greeting: str = "Hello"
+) -> None:
+    """
+    Here the default makes semantic sense:
+    Most greetings are 'Hello', but caller may override.
+    """
+    print(f"{greeting}, {name}!")
+
+
+print("=== MEANINGFUL DEFAULT EXAMPLE ===")
+greet_user(name="Alice")
+greet_user(name="Bob", greeting="Hi")
 print()
 
 
