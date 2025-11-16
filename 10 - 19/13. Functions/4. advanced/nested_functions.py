@@ -10,7 +10,7 @@
 # - It should not be accessible from the outside.
 # - It depends on the outer function's state.
 # ------------------------------------------------------------
-
+from typing import Callable
 
 # ------------------------------------------------------------
 # 1 - BASIC EXAMPLE OF A NESTED FUNCTION
@@ -33,7 +33,7 @@ print()
 # ------------------------------------------------------------
 # 2 - NESTED FUNCTION THAT CAPTURES OUTER VARIABLES (CLOSURE PREVIEW)
 # ------------------------------------------------------------
-def make_multiplier(*, factor: int) -> callable:
+def make_multiplier(*, factor: int) -> Callable[[int], int]:
     """
     Return a function that multiplies by a fixed factor.
     Demonstrates how inner functions capture variables.
@@ -54,7 +54,7 @@ print()
 # CLEAR CLOSURE EXAMPLE: discount calculator factory
 # ------------------------------------------------------------
 
-def make_discount_function(*, percent: float) -> callable:
+def make_discount_function(*, percent: float) -> Callable[[float], float]:
     """
     Create a function that applies a discount.
     The nested function 'apply' remembers the 'percent' value,
