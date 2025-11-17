@@ -1,107 +1,239 @@
 # ------------------------------------------------------------
-# TYPING AND ANNOTATIONS
+# TYPING AND ANNOTATIONS — MODERN AND PRE-3.10 COMPARISON
 # ------------------------------------------------------------
-# Python supports type hints (annotations) to improve readability,
-# catch errors early, and help IDEs and linters.
-# Annotations do NOT enforce types at runtime unless explicitly checked.
+# Python type hints improve readability, reduce ambiguity,
+# and allow tools (IDE, linters, type checkers) to detect errors early.
+#
+# This file demonstrates:
+#   1. Pre-Python-3.10 typing style (Union, Optional, List, Dict)
+#   2. Modern Python 3.10+ typing style (| operator, list[...] etc.)
+#   3. Advanced typing features (TypedDict, Literal, Protocol)
+#
+# Type hints DO NOT enforce runtime safety unless explicitly checked.
 # ------------------------------------------------------------
 
-from typing import Optional, Union, Callable
+from typing import (
+    Optional,
+    Union,
+    List,
+    Dict,
+    Callable,
+    TypedDict,
+    Literal,
+    Protocol,
+)
 
-# ------------------------------------------------------------
-# EXAMPLE 1 — BASIC TYPE ANNOTATIONS
-# ------------------------------------------------------------
-def add_numbers(*, num1: int, num2: int) -> int:
-    """Add two integers and return an integer."""
-    return num1 + num2
 
-def greet_user(*, name: str) -> None:
-    """Print greeting; returns nothing."""
-    print(f"Hello, {name}!")
-
-print("=== BASIC TYPE ANNOTATIONS ===")
-print("Sum:", add_numbers(num1=3, num2=5))
-greet_user(name="Alice")
+print("=== TYPING AND ANNOTATIONS DEMO ===")
 print()
 
 
 # ------------------------------------------------------------
-# EXAMPLE 2 — OPTIONAL AND DEFAULT VALUES
+# SECTION 1 — BASIC FUNCTION ANNOTATIONS
 # ------------------------------------------------------------
-def describe_person(*, name: str, age: Optional[int] = None) -> str:
-    """Return description; age can be omitted."""
-    if age is None:
-        return f"{name}, age unknown"
-    return f"{name}, {age} years old"
+def castom_sum(a: int, b: int) -> int:
+    """Return the sum of two integers."""
+    return a + b
 
-print("=== OPTIONAL ARGUMENTS ===")
-print(describe_person(name="Bob", age=30))
-print(describe_person(name="Charlie"))
+
+def format_name(*, first: str, last: str) -> str:
+    """Return a formatted full name."""
+    return f"{first} {last}"
+
+
+print("=== BASIC ANNOTATIONS ===")
+print(castom_sum(5, 10))
+print(format_name(first="Ada", last="Lovelace"))
 print()
 
 
 # ------------------------------------------------------------
-# EXAMPLE 3 — COMPLEX TYPES
+# SECTION 2 — PRE-PYTHON-3.10 STYLE (OLD TYPING SYNTAX)
 # ------------------------------------------------------------
-def sum_numbers(*, numbers: list[float]) -> float:
-    """Sum a list of floats."""
+# Old style used capitalized containers and Union/Optional.
+
+def sum_list_old(*, numbers: List[float]) -> float:
+    """Sum a list of floats using old-style List[...] annotation."""
     return sum(numbers)
 
-def create_user(**kwargs: Union[str, int]) -> dict[str, Union[str, int]]:
-    """Return a dictionary representing a user."""
-    return kwargs
 
-print("=== COMPLEX TYPES ===")
-print("Sum list:", sum_numbers(numbers=[1.2, 3.4, 5.6]))
-user_dict = create_user(name="Eve", age=25)
-print("User dict:", user_dict)
+def parse_value_old(*, value: Union[int, float, str]) -> str:
+    """Accept int | float | str using old 'Union' style."""
+    return f"Received: {value}"
+
+
+def get_user_age_old(*, age: Optional[int]) -> str:
+    """Old Optional[T] style."""
+    return "Unknown age" if age is None else f"Age: {age}"
+
+
+print("=== OLD PRE-3.10 TYPING STYLE ===")
+print(sum_list_old(numbers=[1.5, 2.5, 3.5]))
+print(parse_value_old(value="Hello"))
+print(get_user_age_old(age=None))
 print()
 
 
 # ------------------------------------------------------------
-# EXAMPLE 4 — CALLABLES (functions as arguments)
+# SECTION 3 — MODERN PYTHON 3.10+ TYPING
 # ------------------------------------------------------------
-def apply_operation(*, num1: int, num2: int, func: Callable[[int, int], int]) -> int:
-    """Apply a function to two integers."""
-    return func(num1, num2)
+# Python 3.10 simplified many type annotations:
+#   Union[X, Y] -> X | Y
+#   Optional[X] -> X | None
+#   List[X] -> list[X]
+#   Dict[K, V] -> dict[K, V]
 
-print("=== CALLABLE ARGUMENTS ===")
-print("Multiply 3*4:", apply_operation(num1=3, num2=4, func=lambda x, y: x * y))
-print("Add 5+6:", apply_operation(num1=5, num2=6, func=lambda x, y: x + y))
+
+def sum_list(*, numbers: list[float]) -> float:
+    """Modern list[float] syntax."""
+    return sum(numbers)
+
+
+def parse_value(*, value: int | float | str) -> str:
+    """Modern union syntax using | operator."""
+    return f"Received: {value}"
+
+
+def get_user_age(*, age: int | None) -> str:
+    """Modern Optional[int] equivalent."""
+    return "Unknown age" if age is None else f"Age: {age}"
+
+
+print("=== MODERN PYTHON 3.10+ TYPING STYLE ===")
+print(sum_list(numbers=[10.0, 20.0, 30.0]))
+print(parse_value(value=42))
+print(get_user_age(age=18))
 print()
 
 
 # ------------------------------------------------------------
-# EXAMPLE 5 — TYPE CHECKING AT RUNTIME
+# SECTION 4 — CALLABLE ANNOTATIONS
 # ------------------------------------------------------------
-def safe_add(*, num1: int, num2: int) -> int:
-    """Check types manually."""
-    if not isinstance(num1, int) or not isinstance(num2, int):
+def apply_function(
+    a: int,
+    b: int,
+    /,
+    *,
+    func: Callable[[int, int], int]
+) -> int:
+    """Apply a math operation to two integers."""
+    return func(a, b)
+
+
+print("=== CALLABLE EXAMPLE ===")
+print(apply_function(3, 4, func=lambda x, y: x * y))
+print()
+
+
+# ------------------------------------------------------------
+# SECTION 5 — TYPEDDICT (STRUCTURED DICTIONARY)
+# ------------------------------------------------------------
+class User(TypedDict):
+    id: int
+    name: str
+    active: bool
+
+
+def create_user(*, user_id: int, name: str) -> User:
+    """Return a dictionary matching the User TypedDict structure."""
+    return {"id": user_id, "name": name, "active": True}
+
+
+print("=== TYPEDDICT ===")
+print(create_user(user_id=1, name="Grace"))
+print()
+
+
+# ------------------------------------------------------------
+# SECTION 6 — LITERAL TYPES (RESTRICTED VALUES)
+# ------------------------------------------------------------
+def set_mode(*, mode: Literal["debug", "release", "test"]) -> str:
+    """Accept only specific string values."""
+    return f"Mode set to: {mode}"
+
+
+print("=== LITERAL TYPES ===")
+print(set_mode(mode="debug"))
+print()
+
+
+# ------------------------------------------------------------
+# SECTION 7 — PROTOCOLS (STRUCTURAL TYPING)
+# ------------------------------------------------------------
+# Protocols allow describing behavior without requiring inheritance.
+#
+# NOTE ABOUT PROTOCOLS AND THIS EXAMPLE:
+# --------------------------------------
+# This example is valid and demonstrates correct usage of Protocols.
+# Protocols implement *structural typing*: an object is accepted if it
+# has the required methods/attributes — regardless of inheritance.
+#
+# However, in real production code this pattern should be used carefully:
+#
+# 1. Protocols are most useful when you design "behavior-based" APIs
+#    (e.g., something that can be called, saved, logged, processed, etc.)
+#    without forcing users to inherit from a specific base class.
+#
+# 2. But for very small, simple cases — like different greeter classes —
+#    a Protocol can be unnecessary overhead. A simple base class or even
+#    duck-typing (calling .greet() directly) is often enough.
+#
+# 3. Protocols shine when:
+#       - You work with external libraries
+#       - You expect many implementations from different teams
+#       - You want mypy/pyright to validate that objects implement
+#         certain behavior *without coupling them through inheritance*
+#
+# 4. The important point:
+#       This example is correct, but it is intentionally minimalistic.
+#       In real projects, Protocols are most beneficial when the interface
+#       describes *meaningful, stable behavior*, not a trivial one-method class.
+#
+# So: the example itself is fine, but do not overuse Protocols for trivial
+# cases — use them when structural typing meaningfully improves flexibility.
+
+
+
+class Greeter(Protocol):
+    def greet(self) -> str:
+        pass
+
+
+class EnglishGreeter:
+    def greet(self) -> str:
+        return "Hello!"
+
+
+class SpanishGreeter:
+    def greet(self) -> str:
+        return "¡Hola!"
+
+
+def run_greeting(*, greeter: Greeter) -> None:
+    """Accept any object that matches the Greeter protocol."""
+    print(greeter.greet())
+
+
+print("=== PROTOCOLS ===")
+run_greeting(greeter=EnglishGreeter())
+run_greeting(greeter=SpanishGreeter())
+print()
+
+
+# ------------------------------------------------------------
+# SECTION 8 — RUNTIME TYPE CHECKING
+# ------------------------------------------------------------
+def safe_add(*, x: int, y: int) -> int:
+    """Demonstrate that type hints do NOT enforce runtime behavior."""
+    if not isinstance(x, int) or not isinstance(y, int):
         raise TypeError("Arguments must be integers")
-    return num1 + num2
+    return x + y
+
 
 print("=== RUNTIME TYPE CHECKING ===")
 try:
-    print(safe_add(num1=3, num2="5"))  # will raise TypeError
+    safe_add(x=3, y="7")
 except TypeError as e:
-    print("Error:", e)
-
-print(safe_add(num1=7, num2=8))
+    print("Caught error:", e)
+print(safe_add(x=10, y=20))
 print()
-
-
-# ------------------------------------------------------------
-# KEY POINTS
-# ------------------------------------------------------------
-# 1. Annotations improve readability and tooling support.
-# 2. Use Optional[type] for values that can be None.
-# 3. Use Union[type1, type2] for multiple acceptable types.
-# 4. Use List[type], Dict[key_type, value_type] for collections.
-# 5. Use Callable[[arg1_type, ...], return_type] for function arguments.
-# 6. Annotations do NOT enforce type at runtime unless checked manually.
-# ------------------------------------------------------------
-
-print("=== SUMMARY OF TYPING AND ANNOTATIONS ===")
-print("Type hints help readability, catching errors early, and tooling support.")
-print("They are strongly recommended in large projects and team code.")
-print("End of file: typing_and_annotations.py")
