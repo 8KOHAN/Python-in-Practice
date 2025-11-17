@@ -142,6 +142,32 @@ while num < 5:
 print()
 
 # -----------------------------
+# ENUMERATE EXAMPLES
+# -----------------------------
+print("ENUMERATE EXAMPLES:")
+
+fruits = ["apple", "banana", "cherry"]
+
+# Basic enumerate loop
+print("Basic enumerate:")
+for index, fruit in enumerate(fruits):
+    print(f"Index = {index}, Fruit = {fruit}")
+print()
+
+# Enumerate with custom start index
+print("Enumerate start=1:")
+for index, fruit in enumerate(fruits, start=1):
+    print(f"{index}. {fruit}")
+print()
+
+# Enumerating over a string
+print("Enumerate over string:")
+for index, char in enumerate("Python"):
+    print(f"{index}: {char}")
+print()
+
+
+# -----------------------------
 # PRACTICAL EXAMPLE: FACTORIAL
 # -----------------------------
 print("FACTORIAL CALCULATION USING FOR LOOP:")
@@ -151,4 +177,3 @@ for i in range(1, n + 1):
     factorial *= i
     print(f"i = {i}, current factorial = {factorial}")
 print(f"Factorial of {n} is {factorial}\n")
-
