@@ -165,57 +165,11 @@ print()
 
 
 # ------------------------------------------------------------
-# EXAMPLE 6 — KEYWORD-ONLY ARGUMENTS (*)
-# ------------------------------------------------------------
-# The '*' symbol in function definition forces the caller to use keyword arguments.
-# It improves readability, prevents ordering mistakes, and makes APIs more stable.
-
-def resize_image(*, width: int, height: int, mode: str) -> None:
-    """Example of using * to require keyword arguments."""
-    print(f"Resizing to {width}x{height} in mode '{mode}'")
-
-print("=== KEYWORD-ONLY ARGUMENTS ===")
-# resize_image(1920, 1080, "cover")  # Error — positional args not allowed
-resize_image(width=1920, height=1080, mode="cover")  # Clear and safe
-print()
-
-# ------------------------------------------------------------
-# ARGUMENT CLARITY: ALWAYS USE '*'
-# ------------------------------------------------------------
-# In modern Python code, it's considered best practice to ALWAYS use '*'
-# to enforce keyword-only arguments — even in simple functions.
-#
-# Why:
-# - Explicit is better than implicit (Zen of Python).
-# - Keyword arguments make code self-documenting.
-# - It prevents mistakes when calling functions with wrong argument order.
-# - It allows you to safely evolve APIs without breaking existing code.
-# - It improves readability and clarity in large or collaborative projects.
-#
-# Example:
-#     def multiply(*, num1: float, num2: float) -> float:
-#         return num1 * num2
-#
-# Call style:
-#     multiply(num1=2, num2=3)
-#
-# This makes argument meaning clear at the call site,
-# avoids confusion about position, and enforces code consistency.
-#
-# In short:
-#   Use '*' for every function that accepts named parameters —
-#   it’s a mark of clarity, safety, and good API design.
-# ------------------------------------------------------------
-
-
-
-# ------------------------------------------------------------
 # SUMMARY
 # ------------------------------------------------------------
 print("=== SUMMARY ===")
 print("Each function should represent ONE clear responsibility.")
 print("Each function should have a meaningful name.")
 print("High-level and low-level logic must be separated.")
-print("Keyword-only arguments (*) enforce clarity in function calls.")
 print("Functions exist to create meaning — not just to reduce repetition.")
 print("End of file: function_design_philosophy.py")
