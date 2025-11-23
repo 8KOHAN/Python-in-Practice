@@ -23,7 +23,6 @@ from __future__ import annotations
 import sys
 import ctypes
 import gc
-from typing import Any, Optional
 
 
 # ----------------------------------------
@@ -232,7 +231,7 @@ def circular_ref_demo() -> None:
     class Node:
         def __init__(self, name: str):
             self.name = name
-            self.other: Optional["Node"] = None
+            self.other: Node | None = None
         def __repr__(self) -> str:
             return f"Node({self.name})"
 
