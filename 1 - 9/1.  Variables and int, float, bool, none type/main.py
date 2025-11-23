@@ -8,10 +8,10 @@
 # -----------------------------
 # INTEGER (int)
 # -----------------------------
-age = 25
-year = 2025
-negative_number = -10
-big_number = 12345678901234567890  # Python supports very large integers
+age: int = 25
+year: int = 2025
+negative_number: int = -10
+big_number: int = 12345678901234567890  # Python supports very large integers
 
 print("=== INTEGER EXAMPLES ===")
 print("age:", age)
@@ -26,10 +26,10 @@ print()
 # -----------------------------
 # FLOAT (float)
 # -----------------------------
-height = 1.75
-weight = 68.5
-temperature = -3.2
-pi = 3.1415926535
+height: float = 1.75
+weight: float = 68.5
+temperature: float = -3.2
+pi: float = 3.1415926535
 
 print("=== FLOAT EXAMPLES ===")
 print("height:", height)
@@ -43,9 +43,9 @@ print()
 # -----------------------------
 # BOOLEAN (bool)
 # -----------------------------
-is_student = True
-has_pet = False
-is_adult = age >= 18
+is_student: bool = True
+has_pet: bool = False
+is_adult: bool = age >= 18
 
 print("=== BOOLEAN EXAMPLES ===")
 print("is_student:", is_student)
@@ -61,7 +61,7 @@ print()
 # -----------------------------
 # NONE TYPE (NoneType)
 # -----------------------------
-middle_name = None
+middle_name: None = None
 
 print("=== NONE TYPE EXAMPLES ===")
 print("middle_name:", middle_name)
