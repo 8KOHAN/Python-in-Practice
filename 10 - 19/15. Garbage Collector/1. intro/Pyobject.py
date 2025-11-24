@@ -18,6 +18,7 @@ CPython implementation but are not guaranteed across all Python implementations.
 # ----------------------------------------
 # 1) IMPORTS
 # ----------------------------------------
+from __future__ import annotations
 import sys
 import ctypes
 import gc
