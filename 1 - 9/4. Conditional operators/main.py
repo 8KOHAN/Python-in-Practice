@@ -1,7 +1,7 @@
 # -----------------------------
 # BASIC IF STATEMENT
 # -----------------------------
-x = 10
+x: int = 10
 
 # Simple condition
 if x > 5:
@@ -13,7 +13,7 @@ print("End of simple if\n")
 # -----------------------------
 # IF-ELSE STATEMENT
 # -----------------------------
-age = int(input("Enter your age: "))
+age: int = int(input("Enter your age: "))
 
 if age >= 18:
     print("You are an adult.")
@@ -24,7 +24,7 @@ print()
 # -----------------------------
 # IF-ELIF-ELSE CHAIN
 # -----------------------------
-temperature = float(input("Enter the temperature in °C: "))
+temperature: float = float(input("Enter the temperature in °C: "))
 
 if temperature < 0:
     print("It's freezing cold!")
@@ -39,8 +39,8 @@ print()
 # -----------------------------
 # MULTIPLE CONDITIONS (AND, OR, NOT)
 # -----------------------------
-has_ticket = input("Do you have a ticket? (yes/no): ").lower().strip() == "yes"
-is_vip = input("Are you a VIP? (yes/no): ").lower().strip() == "yes"
+has_ticket: bool = input("Do you have a ticket? (yes/no): ").lower().strip() == "yes"
+is_vip: bool = input("Are you a VIP? (yes/no): ").lower().strip() == "yes"
 
 # 'and' - both must be true
 if has_ticket and is_vip:
@@ -58,8 +58,8 @@ print()
 # -----------------------------
 # COMPARISON OPERATORS
 # -----------------------------
-a = int(input("Enter first number (a): "))
-b = int(input("Enter second number (b): "))
+a: int = int(input("Enter first number (a): "))
+b: int = int(input("Enter second number (b): "))
 
 print("a == b:", a == b)   # equal
 print("a != b:", a != b)   # not equal
@@ -72,7 +72,7 @@ print()
 # -----------------------------
 # NESTED CONDITIONS
 # -----------------------------
-score = int(input("Enter your exam score (0-100): "))
+score: int = int(input("Enter your exam score (0-100): "))
 
 if score >= 60:
     print("You passed the exam.")
@@ -90,8 +90,8 @@ print()
 # TERNARY (INLINE IF) OPERATOR
 # -----------------------------
 # Syntax: value_if_true if condition else value_if_false
-number = int(input("Enter a number: "))
-parity = "even" if number % 2 == 0 else "odd"
+number: int = int(input("Enter a number: "))
+parity: str = "even" if number % 2 == 0 else "odd"
 print(f"The number {number} is {parity}.")
 print()
 
@@ -99,7 +99,7 @@ print()
 # CHAINED COMPARISONS
 # -----------------------------
 # You can check multiple ranges in a clean way
-num = int(input("Enter a number between 1 and 100: "))
+num: int = int(input("Enter a number between 1 and 100: "))
 
 if 1 <= num <= 100:
     print("Valid number within range.")
@@ -110,7 +110,7 @@ print()
 # -----------------------------
 # USING 'not' FOR NEGATION
 # -----------------------------
-logged_in = input("Are you logged in? (yes/no): ").lower().strip() == "yes"
+logged_in: bool = input("Are you logged in? (yes/no): ").lower().strip() == "yes"
 
 if not logged_in:
     print("Please log in first!")
@@ -122,6 +122,8 @@ print()
 # COMBINATION EXAMPLE
 # -----------------------------
 print("=== ACCESS CONTROL SYSTEM ===")
+user_age: int
+get_age: int
 user_age = get_age = int(input("Enter your age: "))
 has_id = input("Do you have an ID card? (yes/no): ").lower().strip() == "yes"
 
@@ -132,4 +134,3 @@ elif user_age >= 18 and not has_id:
 else:
     print("Access denied: minors are not allowed.")
 print()
-
