@@ -16,7 +16,7 @@
 from __future__ import annotations
 import sys
 import gc
-from types import TracebackType
+from types import FrameType, TracebackType
 from typing import Any
 
 
@@ -263,7 +263,7 @@ def exception_frame_pitfall_demo() -> None:
 
         # Traverse the traceback chain to inspect frames and their locals.
         while tb is not None:
-            frame = tb.tb_frame
+            frame: FrameType = tb.tb_frame
             print("Frame locals:", frame.f_locals)
 
             if "x" in frame.f_locals:
