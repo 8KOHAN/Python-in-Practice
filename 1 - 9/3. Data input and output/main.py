@@ -1,20 +1,20 @@
 # -----------------------------
 # SAFE INPUT FUNCTIONS
 # -----------------------------
-def get_int(*, prompt: str):
+def get_int(*, prompt: str) -> int:
     """Safely read an integer from user input."""
     while True:
         try:
-            value = int(input(prompt))
+            value: int = int(input(prompt))
             return value
         except ValueError:
             print("Invalid input! Please enter an integer number.")
 
-def get_float(*, prompt: str):
+def get_float(*, prompt: str) -> float:
     """Safely read a float from user input."""
     while True:
         try:
-            value = float(input(prompt))
+            value: float = float(input(prompt))
             return value
         except ValueError:
             print("Invalid input! Please enter a number (use '.' for decimals).")
@@ -23,7 +23,7 @@ def get_float(*, prompt: str):
 # -----------------------------
 # BASIC INPUT WITH ERROR HANDLING
 # -----------------------------
-name = input("Enter your name: ").strip()  # strip() removes extra spaces
+name: str = input("Enter your name: ").strip()  # strip() removes extra spaces
 if not name:
     name = "Anonymous"
 
@@ -33,8 +33,8 @@ print()
 # -----------------------------
 # CONVERTING INPUT DATA TYPES SAFELY
 # -----------------------------
-age = get_int(prompt="Enter your age: ")
-height = get_float(prompt="Enter your height (in meters): ")
+age: int = get_int(prompt="Enter your age: ")
+height: float = get_float(prompt="Enter your height (in meters): ")
 
 print(f"You are {age} years old and {height} meters tall.")
 print()
@@ -45,6 +45,8 @@ print()
 while True:
     try:
         print("Enter two integers separated by space:")
+        a: int
+        b: int
         a, b = map(int, input().split())
         break
     except ValueError:
@@ -59,7 +61,7 @@ print()
 while True:
     try:
         print("Enter several integers separated by space:")
-        numbers = list(map(int, input().split()))
+        numbers: list[int] = list(map(int, input().split()))
         if len(numbers) == 0:
             raise ValueError("Empty input!")
         break
@@ -75,11 +77,11 @@ print()
 # -----------------------------
 # STRING INPUT PROCESSING
 # -----------------------------
-sentence = input("Enter a sentence: ").strip()
+sentence: str = input("Enter a sentence: ").strip()
 if not sentence:
     print("You entered an empty sentence.")
 else:
-    words = sentence.split()
+    words: list[str] = sentence.split()
     print("Words in your sentence:", words)
     print("Number of words:", len(words))
 print()
@@ -87,9 +89,9 @@ print()
 # -----------------------------
 # FORMATTED OUTPUT (using f-strings)
 # -----------------------------
-pi = 3.1415926535
-radius = get_float(prompt="Enter circle radius: ")
-area = pi * (radius ** 2)
+PI: float = 3.1415926535
+radius: float = get_float(prompt="Enter circle radius: ")
+area: float = PI * (radius ** 2)
 print(f"Circle area with radius {radius} = {area:.3f}")
 print()
 
@@ -129,11 +131,9 @@ print(f"Name: {name}, Age: {age}, Score: {area:.2f}")
 print("Name: {}, Age: {}, Score: {:.2f}".format(name, age, area))
 print()
 
-# Number formatting
-pi = 3.1415926535
-print("Pi (2 decimals): {:.2f}".format(pi))
-print(f"Pi (3 decimals): {pi:.3f}")
-print("Pi as integer:", int(pi))
+print("Pi (2 decimals): {:.2f}".format(PI))
+print(f"Pi (3 decimals): {PI:.3f}")
+print("Pi as integer:", int(PI))
 print()
 
 # Alignment and width
@@ -154,8 +154,8 @@ print("Hello" + " " + "World!")  # manual space
 print()
 
 # Printing data structures
-fruits = ["apple", "banana", "cherry"]
-info = {"name": "Alice", "age": 25}
+fruits: list[str] = ["apple", "banana", "cherry"]
+info: dict[str, str | int] = {"name": "Alice", "age": 25}
 print("List:", fruits)
 print("Dictionary:", info)
 print()
