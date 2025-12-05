@@ -28,8 +28,8 @@ print("\n")
 # -----------------------------
 print("Converting range to list and tuple:")
 
-numbers_list = list(range(1, 6))
-numbers_tuple = tuple(range(1, 6))
+numbers_list: list[int] = list(range(1, 6))
+numbers_tuple: tuple[int] = tuple(range(1, 6))
 
 print("List:", numbers_list)
 print("Tuple:", numbers_tuple)
@@ -48,7 +48,7 @@ print()
 # -----------------------------
 print("Using built-in functions with range:")
 
-r = range(1, 11)  # 1 to 10
+r: range = range(1, 11)  # 1 to 10
 print("Sum of numbers 1..10 =", sum(r))
 print("Min =", min(r))
 print("Max =", max(r))
@@ -59,7 +59,7 @@ print()
 # RANGE IN CONDITIONAL EXPRESSIONS
 # -----------------------------
 print("Checking if a number belongs to a range:")
-x = int(input("Enter a number (1-10): "))
+x: int = int(input("Enter a number (1-10): "))
 
 if x in range(1, 11):
     print(f"{x} is within the range 1–10.")
@@ -71,7 +71,7 @@ print()
 # USING RANGE IN LIST COMPREHENSIONS
 # -----------------------------
 print("List comprehension with range:")
-squares = [n ** 2 for n in range(1, 6)]
+squares: list[int] = [n ** 2 for n in range(1, 6)]
 print("Squares 1–5:", squares)
 print()
 
@@ -89,7 +89,7 @@ print()
 # RANGE DOES NOT CREATE A REAL LIST
 # -----------------------------
 print("Memory efficiency of range:")
-big_range = range(1_000_000_000)
+big_range: range = range(1_000_000_000)
 print("Range created successfully!")
 print("It doesn’t take much memory because range() is lazy (it generates numbers on demand).")
 print()
@@ -101,4 +101,3 @@ print("Custom step example:")
 for i in range(0, 21, 5):
     print(f"Step {i // 5}: value = {i}")
 print()
-
