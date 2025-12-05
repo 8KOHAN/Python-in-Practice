@@ -8,12 +8,12 @@
 # ---------------------------------------------
 # CREATING TUPLES
 # ---------------------------------------------
-empty_tuple = ()
+EMPTY_TUPLE = ()
 single_element = (5,)  # note the comma! without it, it's not a tuple
 numbers = (1, 2, 3, 4, 5)
 mixed = (10, "hello", 3.14, True, None)
 
-print("Empty tuple:", empty_tuple)
+print("Empty tuple:", EMPTY_TUPLE)
 print("Single element tuple:", single_element)
 print("Numbers tuple:", numbers)
 print("Mixed tuple:", mixed)
