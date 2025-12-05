@@ -7,11 +7,12 @@
 # -----------------------------
 # LIST CREATION
 # -----------------------------
+from typing import Any
 import copy
 
-numbers = [10, 20, 30, 40, 50]
-fruits = ["apple", "banana", "cherry"]
-mixed = [1, "hello", 3.14, True, None]
+numbers: list[int] = [10, 20, 30, 40, 50]
+fruits: list[str] = ["apple", "banana", "cherry"]
+mixed: list[Any] = [1, "hello", 3.14, True, None]
 
 print("=== LIST CREATION ===")
 print("numbers:", numbers)
@@ -92,7 +93,7 @@ print()
 # NESTED LISTS (2D LISTS)
 # -----------------------------
 print("=== NESTED LISTS ===")
-matrix = [
+matrix: list[list[int]] = [
     [1, 2, 3],
     [4, 5, 6],
     [7, 8, 9]
@@ -102,7 +103,7 @@ print("Element [0][1]:", matrix[0][1])  # 2
 print("Row 2:", matrix[1])
 
 # Flattening a nested list (turn 2D → 1D)
-flat = [num for row in matrix for num in row]
+flat: list[int] = [num for row in matrix for num in row]
 print("Flattened list:", flat)
 print()
 
@@ -110,9 +111,9 @@ print()
 # LIST COPYING
 # -----------------------------
 print("=== LIST COPYING ===")
-a = [1, 2, 3]
-b = a  # same list (reference)
-c = a.copy()  # real copy
+a: list[int] | list[list[int]] = [1, 2, 3]
+b: list[int] | list[list[int]] = a  # same list (reference)
+c: list[int] | list[list[int]] = a.copy()  # real copy
 
 a.append(4)
 print("a:", a)
@@ -133,13 +134,13 @@ print()
 # LIST COMPREHENSIONS
 # -----------------------------
 print("=== LIST COMPREHENSIONS ===")
-squares = [x**2 for x in range(1, 6)]
+squares: list[int] = [x**2 for x in range(1, 6)]
 print("Squares 1–5:", squares)
 
-evens = [x for x in range(10) if x % 2 == 0]
+evens: list[int] = [x for x in range(10) if x % 2 == 0]
 print("Even numbers:", evens)
 
-upper_fruits = [fruit.upper() for fruit in fruits]
+upper_fruits: list[str] = [fruit.upper() for fruit in fruits]
 print("Uppercase fruits:", upper_fruits)
 print()
 
@@ -176,13 +177,13 @@ print("# Copying Lists — shallow vs deep copy")
 print("# --------------------------------------")
 
 # Create a nested list (list inside list)
-a = [[1, 2], [3, 4]]
+a: list[list[int]] = [[1, 2], [3, 4]]
 
 # SHALLOW COPY: creates a new outer list, but inner lists are shared
-b = a.copy()
+b: list[list[int]] = a.copy()
 
 # DEEP COPY: creates a completely independent copy (new inner and outer lists)
-c = copy.deepcopy(a)
+c: list[list[int]] = copy.deepcopy(a)
 
 print("Initial state:")
 print("a =", a)
@@ -215,4 +216,3 @@ print("b =", b)
 print("c =", c)
 print("Only c changed, because deepcopy created fully independent objects.")
 print()
-
