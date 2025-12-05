@@ -2,9 +2,9 @@
 # STRING CREATION
 # -----------------------------
 print("STRING CREATION:")
-text1 = "Hello"
-text2 = 'World'
-text3 = """This is
+text1: str = "Hello"
+text2: str = 'World'
+text3: str = """This is
 a multi-line
 string."""
 print(text1)
@@ -16,10 +16,10 @@ print()
 # CONCATENATION AND REPETITION
 # -----------------------------
 print("CONCATENATION AND REPETITION:")
-greeting = text1 + " " + text2  # joining strings
+greeting: str = text1 + " " + text2  # joining strings
 print(greeting)
 
-echo = "Hi! " * 3  # repetition
+echo: str = "Hi! " * 3  # repetition
 print(echo)
 print()
 
@@ -27,7 +27,7 @@ print()
 # STRING INDEXING AND SLICING
 # -----------------------------
 print("INDEXING AND SLICING:")
-word = "Python"
+word: str = "Python"
 print("word =", word)
 print("First character:", word[0])
 print("Last character:", word[-1])
@@ -50,7 +50,7 @@ print("\n")
 # STRING METHODS
 # -----------------------------
 print("STRING METHODS:")
-message = "  Python is FUN!  "
+message: str = "  Python is FUN!  "
 print("Original:", repr(message))
 print("Lowercase:", message.lower())
 print("Uppercase:", message.upper())
@@ -68,10 +68,10 @@ print()
 # STRING SPLITTING AND JOINING
 # -----------------------------
 print("SPLIT AND JOIN:")
-sentence = "Python is easy to learn"
-words = sentence.split()  # split by spaces
+sentence: str = "Python is easy to learn"
+words: list[str] = sentence.split()  # split by spaces
 print("Words list:", words)
-joined = "-".join(words)
+joined: str = "-".join(words)
 print("Joined with '-':", joined)
 print()
 
@@ -89,9 +89,9 @@ print()
 # STRING FORMATTING
 # -----------------------------
 print("STRING FORMATTING:")
-name = "Alice"
-age = 25
-score = 93.4567
+name: str = "Alice"
+age: int = 25
+score: float = 93.4567
 
 # Using f-string
 print(f"Name: {name}, Age: {age}, Score: {score:.2f}")
@@ -107,7 +107,7 @@ print()
 # CHECKING CONTENT (IS METHODS)
 # -----------------------------
 print("CHECKING CONTENT:")
-sample = "Python3"
+sample: str = "Python3"
 print("Is alphabetic?", sample.isalpha())  # False (because of '3')
 print("Is alphanumeric?", sample.isalnum())  # True
 print("Is digit?", sample.isdigit())
@@ -127,8 +127,8 @@ print()
 # STRING COMPARISON
 # -----------------------------
 print("STRING COMPARISON:")
-a = "apple"
-b = "banana"
+a: str = "apple"
+b: str = "banana"
 print("a == b:", a == b)
 print("a != b:", a != b)
 print("a < b:", a < b)   # alphabetically before
@@ -139,13 +139,13 @@ print()
 # MULTILINE STRINGS AND RAW STRINGS
 # -----------------------------
 print("MULTILINE AND RAW STRINGS:")
-multiline = """Line one
+multiline: str = """Line one
 Line two
 Line three"""
 print(multiline)
 
 # Raw string keeps escape characters as-is
-path = r"C:\Users\Alice\Documents\Python"
+path: str = r"C:\Users\Alice\Documents\Python"
 print("Raw string example:", path)
 print()
 
@@ -155,9 +155,9 @@ print()
 print("PRACTICAL EXAMPLES:")
 
 # Count vowels in a string
-text = input("Enter a word to count vowels: ").lower()
-vowels = "aeiou"
-count = 0
+text: str = input("Enter a word to count vowels: ").lower()
+vowels: str = "aeiou"
+count: int = 0
 for ch in text:
     if ch in vowels:
         count += 1
