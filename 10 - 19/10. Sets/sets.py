@@ -5,14 +5,17 @@
 # Sets are mutable: you can add/remove elements.
 # Use set() to create an empty set, {} creates an empty dict.
 
+from typing import Any
+
+
 # -----------------------------
 # CREATION EXAMPLES
 # -----------------------------
 print("=== CREATION ===")
-s1 = {1, 2, 3}
-s2 = set([3, 4, 5])          # from iterable (list)
-s3 = set("hello")            # from string -> chars, duplicates removed
-s_empty = set()              # empty set (NOT {}!)
+s1: set[int] = {1, 2, 3}
+s2: set[int] = set([3, 4, 5])          # from iterable (list)
+s3: set[str] = set("hello")            # from string -> chars, duplicates removed
+s_empty: set = set()              # empty set (NOT {}!)
 
 print("s1:", s1)
 print("s2:", s2)
@@ -24,8 +27,8 @@ print()
 # UNIQUENESS & NO ORDER GUARANTEE
 # -----------------------------
 print("=== UNIQUENESS & ORDER ===")
-dup_list = [1, 2, 2, 3, 3, 3]
-s_from_dup = set(dup_list)
+dup_list: list[int] = [1, 2, 2, 3, 3, 3]
+s_from_dup: set[int] = set(dup_list)
 print("original list:", dup_list)
 print("set from list (duplicates removed):", s_from_dup)
 
@@ -43,7 +46,7 @@ print()
 # MUTATING METHODS (add, update, remove, discard, pop, clear)
 # -----------------------------
 print("=== MUTATION METHODS ===")
-s = {1, 2, 3}
+s: set[int] = {1, 2, 3}
 s.add(4)                    # add single element
 print("after add(4):", s)
 
@@ -60,7 +63,7 @@ except KeyError as e:
     print("remove(10) raised KeyError as expected:", e)
 
 # pop removes and returns an arbitrary element
-popped = s.pop()
+popped: int = s.pop()
 print("popped (arbitrary):", popped)
 print("set after pop():", s)
 
@@ -72,8 +75,8 @@ print()
 # SET OPERATIONS (union, intersection, difference, symmetric_difference)
 # -----------------------------
 print("=== SET OPERATIONS ===")
-A = {1, 2, 3, 4}
-B = {3, 4, 5, 6}
+A: set[int] = {1, 2, 3, 4}
+B: set[int] = {3, 4, 5, 6}
 
 print("A:", A)
 print("B:", B)
@@ -84,7 +87,7 @@ print("B difference A (B - A):", B - A)
 print("symmetric difference (A ^ B):", A ^ B)
 
 # In-place versions
-C = A.copy()
+C: set[int] = A.copy()
 C |= B   # C.update(B)  in-place union
 print("C after in-place union with B (C |= B):", C)
 print()
@@ -93,8 +96,8 @@ print()
 # SUBSET / SUPERSET / DISJOINT
 # -----------------------------
 print("=== RELATION CHECKS ===")
-X = {1, 2}
-Y = {1, 2, 3, 4}
+X: set[int] = {1, 2}
+Y: set[int] = {1, 2, 3, 4}
 
 print("X:", X, "Y:", Y)
 print("X issubset Y:", X.issubset(Y))    # X <= Y
@@ -106,11 +109,11 @@ print()
 # SET COMPREHENSIONS
 # -----------------------------
 print("=== SET COMPREHENSIONS ===")
-squares = {n * n for n in range(6)}
+squares: set[int] = {n * n for n in range(6)}
 print("squares:", squares)
 
 # Filtering example
-evens = {n for n in range(20) if n % 2 == 0}
+evens: set[int] = {n for n in range(20) if n % 2 == 0}
 print("evens (0..18):", evens)
 print()
 
@@ -118,7 +121,7 @@ print()
 # HASHABILITY & IMMUTABILITY OF ELEMENTS
 # -----------------------------
 print("=== HASHABILITY ===")
-good = {1, "a", (1, 2)}     # int, str, tuple are hashable
+good: set[Any] = {1, "a", (1, 2)}     # int, str, tuple are hashable
 print("good set:", good)
 
 try:
@@ -136,11 +139,11 @@ print()
 # FROZENSET (immutable set)
 # -----------------------------
 print("=== FROZENSET ===")
-fs = frozenset([1, 2, 3])
+fs: frozenset[int] = frozenset([1, 2, 3])
 print("frozenset:", fs)
 # fs.add(4)  # AttributeError if uncommented: frozenset has no add()
 # frozenset is hashable, so it can be used as a dict key or element of a set
-d = {fs: "value"}           # valid because frozenset is immutable & hashable
+d: dict[frozenset[int], str] = {fs: "value"}           # valid because frozenset is immutable & hashable
 print("frozenset can be dict key:", d)
 print()
 
@@ -149,17 +152,17 @@ print()
 # -----------------------------
 print("=== COMMON USE CASES ===")
 # 1. Remove duplicates from a list (order not preserved)
-nums = [3, 1, 2, 3, 2, 1]
-unique = set(nums)
+nums: list[int] = [3, 1, 2, 3, 2, 1]
+unique: set[int] = set(nums)
 print("unique (order may change):", unique)
 
 # 2. Fast membership test (O(1) average)
-s_lookup = set(range(1000000))
+s_lookup: set[int] = set(range(1000000))
 print("Membership test example: 999999 in set?", 999999 in s_lookup)
 
 # 3. Find unique words in text
-text = "apple banana apple orange banana pear"
-unique_words = set(text.split())
+text: str = "apple banana apple orange banana pear"
+unique_words: set[str] = set(text.split())
 print("unique words:", unique_words)
 print()
 
@@ -171,4 +174,3 @@ print()
 # - Keep elements hashable for sets to work.
 
 print("End of set examples.")
-
