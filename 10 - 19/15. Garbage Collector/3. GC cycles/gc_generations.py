@@ -13,7 +13,6 @@ Focus:
 
 from __future__ import annotations
 import gc
-import sys
 
 
 # ----------------------------------------
@@ -192,9 +191,6 @@ def disable_gc_demo() -> None:
 # ----------------------------------------
 
 if __name__ == "__main__":
-    print(f"Python: {sys.version.split()[0]}")
-    print()
-
     show_thresholds()
     gen0_demo()
     promotion_demo()
