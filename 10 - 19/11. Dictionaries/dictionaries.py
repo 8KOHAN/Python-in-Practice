@@ -6,16 +6,19 @@
 # - Values can be any objects.
 # - Preserves insertion order (Python 3.7+).
 # - Average O(1) lookup, insert, delete.
+from typing import KeysView, ValuesView, ItemsView
+from typing import Any
+
 
 # -----------------------------
 # CREATION
 # -----------------------------
 print("=== CREATION ===")
-d1 = {"name": "Alice", "age": 25, "city": "Kyiv"}
-d2 = dict(country="Ukraine", code=380)           # keyword args
-d3 = dict([("a", 1), ("b", 2)])                 # from iterable of pairs
-d4 = {}                                         # empty dict
-d5 = {("x", 1): "tuple key allowed"}             # tuple as a key (hashable)
+d1: dict[str, str | int] = {"name": "Alice", "age": 25, "city": "Kyiv"}
+d2: dict[str, str | int] = dict(country="Ukraine", code=380)           # keyword args
+d3: dict[str, int] = dict([("a", 1), ("b", 2)])                 # from iterable of pairs
+d4: dict[Any, Any] = {}                                         # empty dict
+d5: dict[tuple[str, int], str] = {("x", 1): "tuple key allowed"}             # tuple as a key (hashable)
 
 print("d1:", d1)
 print("d2:", d2)
@@ -42,7 +45,7 @@ print()
 # INSERT / UPDATE / MERGE
 # -----------------------------
 print("=== INSERT / UPDATE / MERGE ===")
-d = {"a": 1}
+d: dict[str, int] = {"a": 1}
 d["b"] = 2                                     # insert or overwrite
 d["a"] = 100                                   # update
 print("after assignments:", d)
@@ -51,7 +54,7 @@ d.update({"c": 3, "d": 4})                     # update from another dict
 print("after update:", d)
 
 # Python 3.9+: merge operator
-e = {"d": 40, "e": 5}
+e: dict[str, int] = {"d": 40, "e": 5}
 merged = d | e                                  # produces a new dict
 print("merged d | e:", merged)
 
@@ -63,27 +66,29 @@ print()
 # DELETE / POP / POPITEM / SETDEFAULT
 # -----------------------------
 print("=== DELETE / POP / POPITEM / SETDEFAULT ===")
-user = {"name": "Bob", "age": 30, "country": "UA"}
+user: dict[str, str | int] = {"name": "Bob", "age": 30, "country": "UA"}
 
 # del by key (KeyError if missing)
 del user["country"]
 print("after del country:", user)
 
 # pop returns and removes key (KeyError if missing without default)
-age_value = user.pop("age")
+age_value: int = user.pop("age")
 print("popped age:", age_value, "; user:", user)
 
 # pop with default to avoid KeyError
-missing = user.pop("unknown", "not found")
+missing: str = user.pop("unknown", "not found")
 print("pop('unknown','not found') ->", missing)
 
 # popitem removes the last inserted key-value (since Py3.7 order preserved)
+last_key: str
+last_val: int
 last_key, last_val = {"x": 1, "y": 2, "z": 3}.popitem()
 print("popitem example:", (last_key, last_val))
 
 # setdefault: return existing value OR set and return default
-profile = {"name": "Eve"}
-lang = profile.setdefault("lang", "en")        # creates 'lang' if missing
+profile: dict[str, str] = {"name": "Eve"}
+lang: str = profile.setdefault("lang", "en")        # creates 'lang' if missing
 print("profile after setdefault:", profile, "; returned:", lang)
 print()
 
@@ -91,10 +96,10 @@ print()
 # VIEWS: KEYS / VALUES / ITEMS
 # -----------------------------
 print("=== VIEWS (DYNAMIC) ===")
-v = {"a": 1, "b": 2}
-keys_view = v.keys()
-values_view = v.values() 
-items_view = v.items()
+v: dict[str, int] = {"a": 1, "b": 2}
+keys_view: KeysView[str] = v.keys()
+values_view: ValuesView[int] = v.values()
+items_view: ItemsView[str, int] = v.items()
 print("keys before:", list(keys_view))
 print("values before:", list(values_view))
 print("items before:", list(items_view))
@@ -108,7 +113,7 @@ print()
 # ITERATION PATTERNS
 # -----------------------------
 print("=== ITERATION ===")
-grades = {"Alice": 95, "Bob": 82, "Cara": 91}
+grades: dict[str, int] = {"Alice": 95, "Bob": 82, "Cara": 91}
 
 print("iterate keys:")
 for name in grades:
@@ -137,8 +142,8 @@ print()
 # DICT COMPREHENSIONS
 # -----------------------------
 print("=== DICT COMPREHENSIONS ===")
-squares = {n: n * n for n in range(6)}
-even_map = {n: "even" for n in range(10) if n % 2 == 0}
+squares: dict[int, int] = {n: n * n for n in range(6)}
+even_map: dict[int, str] = {n: "even" for n in range(10) if n % 2 == 0}
 print("squares:", squares)
 print("even_map:", even_map)
 print()
@@ -147,7 +152,7 @@ print()
 # NESTED DICTS
 # -----------------------------
 print("=== NESTED DICTS ===")
-users = {
+users: dict[int, dict[str, str | list[str]]] = {
     1: {"name": "Alice", "roles": ["admin", "editor"]},
     2: {"name": "Bob", "roles": ["viewer"]},
 }
@@ -160,7 +165,7 @@ print()
 # ERROR HANDLING: KeyError
 # -----------------------------
 print("=== KeyError HANDLING ===")
-conf = {"host": "localhost", "port": 8000}
+conf: dict[str, str | int] = {"host": "localhost", "port": 8000}
 try:
     print("protocol:", conf["protocol"])  # KeyError
 except KeyError as e:
@@ -171,7 +176,9 @@ print()
 # IMMUTABLE vs MUTABLE KEYS
 # -----------------------------
 print("=== KEY HASHABILITY ===")
-ok = {42: "int key", "x": "str key", (1, 2): "tuple key"}
+ok: dict[int | str | tuple[int, int], str] = {
+    42: "int key", "x": "str key", (1, 2): "tuple key"
+}
 print("ok keys:", ok)
 
 try:
@@ -186,9 +193,11 @@ print()
 print("=== COPY ===")
 import copy
 
-orig = {"a": 1, "nested": {"x": 10}}
-shallow = orig.copy()                # or dict(orig)
-deep = copy.deepcopy(orig)
+orig: dict[str, int | dict[str, int]] = {
+    "a": 1, "nested": {"x": 10}
+}
+shallow: dict[str, int | dict[str, int]] = orig.copy()  # or dict(orig)
+deep: dict[str, int | dict[str, int]] = copy.deepcopy(orig)
 
 orig["nested"]["x"] = 99
 print("orig:", orig)
@@ -201,8 +210,8 @@ print()
 # -----------------------------
 print("=== COMMON PATTERNS ===")
 # 1) Counting occurrences
-text = "apple banana apple orange banana apple"
-counter = {}
+text: str = "apple banana apple orange banana apple"
+counter: dict[str, int] = {}
 for word in text.split():
     counter[word] = counter.get(word, 0) + 1
 print("word counts:", counter)
@@ -213,19 +222,16 @@ counter = Counter(text.split())
 print(counter)
 
 # 2) Grouping items with setdefault
-pairs = [("A", 1), ("B", 2), ("A", 3), ("B", 4), ("C", 5)]
-grouped = {}
+pairs: list[tuple[str, int]] = [("A", 1), ("B", 2), ("A", 3), ("B", 4), ("C", 5)]
+grouped: dict[str, list[int]] = {}
 for k, v in pairs:
     grouped.setdefault(k, []).append(v)
 print("grouped:", grouped)
 
 # Using defaultdict for cleaner grouping
 from collections import defaultdict
-grouped2 = defaultdict(list)
+grouped2: defaultdict[str, list[int]] = defaultdict(list)
 for k, v in pairs:
     grouped2[k].append(v)
 print("grouped2 (defaultdict):", dict(grouped2))  # cast to dict for pretty print
 print()
-
-print("End of dict examples.")
-
