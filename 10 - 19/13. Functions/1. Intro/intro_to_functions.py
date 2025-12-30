@@ -68,8 +68,8 @@ print()
 # EXAMPLE 3 — Functions improve readability
 # ------------------------------------------------------------
 print("=== INLINE LOGIC (BAD READABILITY) ===")
-numbers = [1, 2, 3, 4, 5]
-squared_inline = []
+numbers: list[int] = [1, 2, 3, 4, 5]
+squared_inline: list[int] = []
 for n in numbers:
     squared_inline.append(n * n)
 print("Inline squares:", squared_inline)
