@@ -16,7 +16,7 @@
 # LIST OF LISTS
 # -----------------------------------------
 print("=== LIST OF LISTS ===")
-matrix = [
+matrix: list[list[int]] = [
     [1, 2, 3],
     [4, 5, 6],
     [7, 8, 9],
@@ -154,4 +154,3 @@ print("Admin roles:", config["users"][0]["roles"])
 print("Guest role:", config["users"][1]["roles"])
 print("Backup path:", config["features"]["backup"]["path"])
 print()
-
