@@ -140,8 +140,6 @@ def multiple_failure_sources_demo() -> None:
 # ----------------------------------------
 # 5) QUICK-RUN
 # ----------------------------------------
-# Centralized execution point.
-# This keeps the module import-safe and predictable.
 
 
 if __name__ == "__main__":
