@@ -21,14 +21,14 @@ from __future__ import annotations
 # In EAFP, you assume the operation will succeed and handle exceptions
 # if something goes wrong. This is idiomatic in Python.
 
-def eafp_demo(data: dict, key: str) -> None:
+def eafp_demo(data: dict[str, int], key: str) -> None:
     """
     Demonstrate EAFP approach for dictionary access.
     """
     print("=== EAFP Demo ===")
 
     try:
-        value = data[key]
+        value: int = data[key]
         print(f"Value found: {value}")
     except KeyError:
         print(f"Key '{key}' not found!")
@@ -41,14 +41,14 @@ def eafp_demo(data: dict, key: str) -> None:
 # In LBYL, you check conditions before performing operations
 # to avoid exceptions. This style is more common in other languages.
 
-def lbyl_demo(data: dict, key: str) -> None:
+def lbyl_demo(data: dict[str, int], key: str) -> None:
     """
     Demonstrate LBYL approach for dictionary access.
     """
     print("=== LBYL Demo ===")
 
     if key in data:
-        value = data[key]
+        value: int = data[key]
         print(f"Value found: {value}")
     else:
         print(f"Key '{key}' not found!")
