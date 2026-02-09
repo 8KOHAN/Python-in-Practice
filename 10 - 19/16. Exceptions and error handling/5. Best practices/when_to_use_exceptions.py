@@ -10,6 +10,7 @@ from __future__ import annotations
 # ----------------------------------------
 # 1) BASIC EXCEPTION USAGE
 # ----------------------------------------
+
 def basic_exception_demo() -> None:
     print("=== basic_exception_demo ===")
 
@@ -41,6 +42,7 @@ def basic_exception_demo() -> None:
 # ----------------------------------------
 # 2) WHEN EXCEPTIONS ARE APPROPRIATE
 # ----------------------------------------
+
 def appropriate_exception_demo() -> None:
     print("=== appropriate_exception_demo ===")
 
@@ -65,6 +67,7 @@ def appropriate_exception_demo() -> None:
 # ----------------------------------------
 # 3) WHEN NOT TO USE EXCEPTIONS
 # ----------------------------------------
+
 def inappropriate_exception_demo() -> None:
     print("=== inappropriate_exception_demo ===")
 
@@ -87,6 +90,7 @@ def inappropriate_exception_demo() -> None:
 # ----------------------------------------
 # 4) QUICK-RUN
 # ----------------------------------------
+
 if __name__ == "__main__":
     basic_exception_demo()
     appropriate_exception_demo()
