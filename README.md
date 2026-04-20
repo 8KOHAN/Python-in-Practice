@@ -1,1 +1,86 @@
 # Python-in-Practice
+
+## Project Structure
+```bash
+│
+├── 01_basics/
+│   ├── variables.py
+│
+├── 02_operations/
+│   ├── arithmetic_operations_and_priority_operators.py
+│
+├── 03_io/
+│   ├── data_input_and_output.py
+│
+├── 04_conditions/
+│   ├── conditional_operators.py
+│
+├── 05_loops/
+│   ├── loops.py
+│
+├── 06_ranges/
+│   ├── ranges.py
+│
+├── 07_strings/
+│   ├── strings.py
+│
+├── 08_lists/
+│   ├── lists.py
+│
+├── 09_tuples/
+│   ├── tuples.py
+│
+├── 10_sets/
+│   ├── sets.py
+│
+├── 11_dictionaries/
+│   ├── dictionaries.py
+│
+├── 12_nested_data_structures/
+│   ├── main.py
+│
+├── 13_functions/
+│   ├── 01_intro/...
+│   ├── 02_best_practices/...
+│   ├── 03_args_kwargs/...
+│   ├── 04_advanced/...
+│   ├── 05_lambda/...
+│   ├── 06_scope/...
+│
+├── 14_typing_modern/
+│   ├── variables_and_typing_modern.py
+│
+├── 15_garbage_collector/
+│   ├── 01_intro/...
+│   ├── 02_refcount/...
+│   ├── 03_gc_cycles/...
+│   ├── 04_finalization_and_weakrefs/...
+│   ├── 05_memory_and_allocators/...
+│   ├── 06_frames_tracebacks_shutdown/...
+│
+├── 16_exceptions/
+│   ├── 01_basics/...
+│   ├── 02_builtin_exceptions/...
+│   ├── 03_raising_and_chaining/...
+│   ├── 04_custom_exceptions/...
+│   ├── 05_best_practices/...
+│   ├── 06_typing_and_exceptions/...
+│
+├── 17_classes/
+│   ├── 01_object_model/...
+│   ├── 02_class_basics/...
+│   ├── 03_encapsulation/...
+│   ├── 04_dataclasses/...
+│   ├── 05_inheritance/...
+│   ├── 06_abstractions/...
+│   ├── 07_protocols_and_duck_typing/...
+│   ├── 08_magic_methods/...
+│
+└── README.md
+
+
+
+
+
+
+```
