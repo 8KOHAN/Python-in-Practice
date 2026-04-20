@@ -1,6 +1,4 @@
-# Garbage Collector
-
-## Project Structure
+# Garbage Collector Structure
 ```bash
 ├── 01_intro/
 │   ├── Pyobject.py
