@@ -1,4 +1,4 @@
-## Project Structure
+# Functions Structure
 ```bash
 ├── 01_intro/
 │   ├── intro_to_functions.py
