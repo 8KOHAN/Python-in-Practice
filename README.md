@@ -37,7 +37,7 @@
 │   ├── dictionaries.py
 │
 ├── 12_nested_data_structures/
-│   ├── main.py
+│   ├── nested_data_structures.py
 │
 ├── 13_functions/
 │   ├── 01_intro/...
